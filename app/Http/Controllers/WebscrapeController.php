@@ -10,12 +10,13 @@ class WebscrapeController extends Controller
     private $results = array();
     private$longTitleEntries = array();
     private $smallTitleEntries = array();
+
     public function scraper()
     {
+        //setup
         $client = new Client();
         $url = 'https://news.ycombinator.com/';
         $html = $client->request('GET', $url);
-
         $crawler = new Crawler($html->getBody());
         $counter = 0;
 
@@ -36,7 +37,8 @@ class WebscrapeController extends Controller
         );
     }
 
-    private function filterResults(string $title, string $rank, string $numberOfComments, string $points ) {
+    private function filterResults(string $title, string $rank, string $numberOfComments, string $points): Array
+    {
         $wordsInTitle = str_word_count($title, 0);
         //Filter all previous entries with more than five words in the title ordered by the number of comments first.
         if ($wordsInTitle > 5) {
@@ -57,7 +59,7 @@ class WebscrapeController extends Controller
                 'title' => $title,
                 'points' => $points,
                 'comments' => $numberOfComments,
-                ]; 
+                ];
             //desc order for points
             usort($this->smallTitleEntries, function ($a, $b) {
                 return $b['points'] <=> $a['points'];
@@ -68,7 +70,8 @@ class WebscrapeController extends Controller
         return $this->results;
     }
 
-    private function scrapeInfo(Crawler $entry) {
+    private function scrapeInfo(Crawler $entry)
+    {
         $nextElement = $entry->nextAll()->filter('tr')->first();
         $title = $entry->filter('td.title span.titleline')->text();
         $rank = $entry->filter('td.title span.rank')->text();
@@ -82,6 +85,6 @@ class WebscrapeController extends Controller
         }
 
         //apply filters
-        $this->filterResults($title, $rank, $numberOfComments, $points );
+        $this->filterResults($title, $rank, $numberOfComments, $points);
     }
 }
