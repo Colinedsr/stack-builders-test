@@ -40,26 +40,24 @@ class WebscrapeController extends Controller
         $wordsInTitle = str_word_count($title, 0);
         //Filter all previous entries with more than five words in the title ordered by the number of comments first.
         if ($wordsInTitle > 5) {
-            array_push($this->longTitleEntries, [
+            $this->longTitleEntries[] = [
                 'rank' => $rank,
                 'title' => $title,
                 'points' => $points,
                 'comments' => $numberOfComments,
-                ]
-            );
+                ];
             //desc order for comments
             usort($this->longTitleEntries, function ($a, $b) {
                 return $b['comments'] <=> $a['comments'];
             });
         } else {
         // Filter all previous entries with less than or equal to five words in the title ordered by points.
-            array_push($this->smallTitleEntries, [
+            $this->smallTitleEntries[] = [
                 'rank' => $rank,
                 'title' => $title,
                 'points' => $points,
                 'comments' => $numberOfComments,
-                ]
-            ); 
+                ]; 
             //desc order for points
             usort($this->smallTitleEntries, function ($a, $b) {
                 return $b['points'] <=> $a['points'];
@@ -85,7 +83,5 @@ class WebscrapeController extends Controller
 
         //apply filters
         $this->filterResults($title, $rank, $numberOfComments, $points );
-
-        return $this->results;
     }
 }
