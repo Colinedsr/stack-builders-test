@@ -17,7 +17,7 @@ export default function App() {
 
     return (
         entries && entries.map((e, index) =>
-            <ul key={index}><div>{e.rank}- {e.title}</div><div>{e.points}, {e.comments}</div></ul>
+            <ul key={index}><div>{e.rank}- {e.title}</div><div>{e.points} points, {e.comments} comment(s)</div></ul>
         )
     );
 }
