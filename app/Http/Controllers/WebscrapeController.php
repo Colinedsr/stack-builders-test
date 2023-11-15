@@ -47,7 +47,8 @@ class WebscrapeController extends Controller
         }
     }
 
-    private function filterResults(string $title, string $rank, string $numberOfComments, string $points): Array
+    // only making it public for tests purposes
+    public function filterResults(string $title, string $rank, string $numberOfComments, string $points): Array
     {
         $wordsInTitle = count(explode(" ", $title));
         //Filter all previous entries with more than five words 
