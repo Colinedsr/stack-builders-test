@@ -2,9 +2,11 @@
 
 Project done with Laravel.
 
-In Local run these two command lines : 
+In Local run these command lines : 
 - `npm run dev`
 - `php artisan serve`
+- `vendor/bin/phpunit` for phpUnit tests
+- `jest` for front tests
 
 ## Instructions 
 
