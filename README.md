@@ -1,6 +1,7 @@
 ## Repository description
 
-Project done with Laravel.
+Project done with Laravel. - added a front in React to show the entries 
+
 
 In Local run these command lines : 
 - `npm run dev`
