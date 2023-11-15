@@ -28,7 +28,7 @@ class WebscrapeController extends Controller
             $counter = 0;
 
             // scrap website 
-            $crawler->filter('tr.athing')->each(function (Crawler $entry, $index) use ($counter) {
+            $crawler->filter('tr.athing')->each(function ($entry) use ($counter) {
                     if ($counter >= 30) {
                         return false;
                     }
